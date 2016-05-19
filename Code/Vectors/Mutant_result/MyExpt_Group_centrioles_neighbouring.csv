@@ -1,0 +1,4 @@
+ImageNumber,ObjectNumber,Location_Center_X,Location_Center_Y,Neighbors_AngleBetweenNeighbors_Expanded,Neighbors_FirstClosestDistance_Expanded,Neighbors_FirstClosestObjectNumber_Expanded,Neighbors_NumberOfNeighbors_Expanded,Neighbors_PercentTouching_Expanded,Neighbors_SecondClosestDistance_Expanded,Neighbors_SecondClosestObjectNumber_Expanded,Number_Object_Number,Parent_V1
+1,1,89.7006998765,87.197200494,128.347207225,52.0010810298,3,2.0,72.2962962963,74.4457963325,2,1,1
+1,2,56.295224977,20.6671258035,20.9162137866,74.4457963325,1,1.0,50.3386004515,114.236367019,3,2,0
+1,3,140.624015009,97.7294559099,30.7365789884,52.0010810298,1,1.0,46.5486725664,114.236367019,2,3,0
