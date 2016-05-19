@@ -3,20 +3,20 @@ run("Close All");
 // Sigmas for LoG
 logX = 2;
 logY = 2;
-logZ = 1;
+logZ = 2;
 
 
 // Radius for maxima detection
 rX = 2;
 rY = 2;
-rZ = 1;
+rZ = 2;
 i = 1; 
 
  dir = getDirectory("Choose a Directory "); 
  dir2 = getDirectory("Choose a Result Directory "); 
  print(dir);
  list = getFileList(dir); 
- ch=3;
+ ch=1;
  //print(list[1]);
  //setBatchMode(true); 
      for (k=0; k<list.length; k++) { 
@@ -51,7 +51,7 @@ middle = round(slices/2);
 
 run("Duplicate...","title=Frame"+i+" duplicate channels="+ch);
 selectWindow("Frame"+i);
-run("Gaussian Blur 3D...", "x=.25 y=.25 z=.25" );
+run("Gaussian Blur 3D...", "x=.5 y=.5 z=.5" );
 while (getTitle() != "Frame"+i) {
 		wait(500);
 	}
@@ -64,6 +64,7 @@ run("LoG 3D", "sigmax="+logX+" sigmay="+logY+" sigmaz="+logZ+" displaykernel=0 v
 while (getTitle() != "LoG of Frame"+i) {
 		wait(500);
 	}
+
 selectWindow("LoG of Frame"+i);
 //setOption("BlackBackground", false);
 //run("Make Binary", "method=Otsu background=Light");
@@ -106,14 +107,13 @@ run("Z Project...", "projection=[Max Intensity]");
 run("Enhance Contrast...", "saturated=0 normalize");
 
 // This is value of removing weak detection. 1638 is 2.5% of 65535) 
-setThreshold(13118, 65535); 
+setThreshold(1638, 65535); 
 run("Threshold", "thresholded remaining"); 
 
 run("16-bit");
 run("Multiply...", "value=257.000 stack");
 run("Invert LUT");
 
-//run("3D Fast Filters","filter=MaximumLocal radius_x_pix=1.0 radius_y_pix=1.0 radius_z_pix=1.0 Nb_cpus=4");
 run("Find Maxima...", "noise=10 output=[Single Points]");
 
 run("16-bit");
@@ -122,10 +122,8 @@ run("Invert LUT");
 
 run("Merge Channels...", "c2=[MAX_3D_MaximumLocal Maxima] c4=MAX_Frame1 keep ignore");
 saveAs("tiff", path2+"-Overlay.tif"); 
-
 selectWindow("MAX_3D_MaximumLocal Maxima");
 saveAs("tiff", path2+"-MAX_3D.tif"); 
-
 
 selectWindow("MAX_Frame1");
 saveAs("tiff", path2+"-MAX_F.tif");
@@ -133,7 +131,6 @@ saveAs("tiff", path2+"-MAX_F.tif");
  run("Close All");
        // close(); 
       //  saveAs("results", path2+"-results.txt"); 
-
  } 
 
 //run("Tiff...");
